@@ -1,0 +1,4 @@
+xarm7_moveit/xarm7_servo_gripper.py
+xarm7_moveit/xarm7_servo_linear_track.py
+xarm7_moveit/xarm7_bol.py
+xarm7_moveit/xarm7_demo.py

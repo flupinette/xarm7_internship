@@ -4,6 +4,22 @@ This package allows you to convert a ROS bag file that has recorded the robot's 
 
 This package was developed to replay a trajectory performed in manual mode. It has been tested only in this scenario but should work under other circumstances as well.
 
+## Manual mode 
+
+If you want to control the robot manually, you need to do :
+
+```bash
+ros2 launch xarm_api xarm7_driver.launch.py robot_ip:=192.168.1.240 add_gripper:=true
+```
+
+and then :
+
+```bash
+ros2 service call /xarm/motion_enable xarm_msgs/srv/SetInt16ById "{id: 8, data: 1}"
+ros2 service call /xarm/set_mode xarm_msgs/srv/SetInt16 "{data: 2}"
+ros2 service call /xarm/set_state xarm_msgs/srv/SetInt16 "{data: 0}"
+```
+
 ## Adapting the Code to Your Situation
 
 Change the `bag_path` variable in the `trajectory_recorder.py` file to match your specific setup.
