@@ -59,6 +59,11 @@ sudo apt-get install liboctomap-dev octomap-tools
 sudo apt-get install ros-humble-octomap ros-humble-octomap-mapping ros-humble-octomap-msgs ros-humble-octomap-ros ros-humble-octomap-server
 ```
 
+Add the following line to your `src/xarm_ros2/xarm_moveit_config/package.xml` file:
+```xml
+<depend>octomap</depend>
+```
+
 Then, modify the `src/xarm_ros2/xarm_moveit_config/launch/_robot_moveit_common2.launch.py` file by replacing:
 
 ```Python

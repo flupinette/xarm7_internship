@@ -1,0 +1,106 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:macro name="orbbec_gazebo" params="prefix:='' ">
+    <xacro:property name="M_PI" value="3.1415926535897931" />
+    
+    <!-- RGB Camera -->
+    <gazebo reference="${prefix}camera_color_frame">
+      <sensor name="color_camera" type="camera">
+        <camera name="color_camera">
+          <horizontal_fov>${60.0*M_PI/180.0}</horizontal_fov>
+          <image>
+            <width>640</width>
+            <height>480</height>
+            <format>R8G8B8</format>
+          </image>
+          <clip>
+            <near>0.05</near>
+            <far>8.0</far>
+          </clip>
+          <noise>
+            <type>gaussian</type>
+            <mean>0.0</mean>
+            <stddev>0.007</stddev>
+          </noise>
+        </camera>
+        <always_on>1</always_on>
+        <update_rate>30</update_rate>
+        <visualize>1</visualize>
+        <plugin name="color_camera_controller" filename="libgazebo_ros_camera.so">
+          <camera_name>camera</camera_name>
+          <frame_name>${prefix}camera_color_optical_frame</frame_name>
+          <image_topic_name>color/image_raw</image_topic_name>
+          <camera_info_topic_name>color/camera_info</camera_info_topic_name>
+        </plugin>
+      </sensor>
+    </gazebo>
+
+    <!-- Depth Camera -->
+    <gazebo reference="${prefix}camera_depth_frame">
+      <sensor name="depth_camera" type="depth">
+        <camera name="depth_camera">
+          <horizontal_fov>${60.0*M_PI/180.0}</horizontal_fov>
+          <image>
+            <width>640</width>
+            <height>480</height>
+          </image>
+          <clip>
+            <near>0.05</near>
+            <far>8.0</far>
+          </clip>
+          <noise>
+            <type>gaussian</type>
+            <mean>0.0</mean>
+            <stddev>0.1</stddev>
+          </noise>
+        </camera>
+        <always_on>1</always_on>
+        <update_rate>30</update_rate>
+        <visualize>0</visualize>
+        <plugin name="depth_camera_controller" filename="libgazebo_ros_camera.so">
+          <camera_name>camera</camera_name>
+          <frame_name>${prefix}camera_depth_optical_frame</frame_name>
+          <image_topic_name>depth/image_raw</image_topic_name>
+          <camera_info_topic_name>depth/camera_info</camera_info_topic_name>
+        </plugin>
+      </sensor>
+    </gazebo>
+
+    <!-- Point Cloud Generation -->
+    <gazebo>
+      <plugin name="orbbec_pointcloud" filename="libgazebo_ros_openni_kinect.so">
+        <camera_name>camera</camera_name>
+        <frame_name>${prefix}camera_link</frame_name>
+        <depth_image_topic_name>depth/image_raw</depth_image_topic_name>
+        <depth_image_camera_info_topic_name>depth/camera_info</depth_image_camera_info_topic_name>
+        <rgb_image_topic_name>color/image_raw</rgb_image_topic_name>
+        <rgb_image_camera_info_topic_name>color/camera_info</rgb_image_camera_info_topic_name>
+        <point_cloud_topic_name>depth/points</point_cloud_topic_name>
+        <point_cloud_cutoff>8.0</point_cloud_cutoff>
+        <point_cloud_cutoff_max>8.0</point_cloud_cutoff_max>
+      </plugin>
+    </gazebo>
+
+
+    <gazebo reference="${prefix}camera_link">
+      <static>false</static>
+      <gravity>false</gravity>
+      <selfCollide>true</selfCollide>
+    </gazebo>
+    
+    <gazebo reference="${prefix}camera_color_frame">
+      <static>false</static>
+      <gravity>false</gravity>
+      <selfCollide>true</selfCollide>
+    </gazebo>
+    
+    <gazebo reference="${prefix}camera_depth_frame">
+      <static>false</static>
+      <gravity>false</gravity>
+      <selfCollide>true</selfCollide>
+    </gazebo>
+
+  </xacro:macro>
+
+</robot>
