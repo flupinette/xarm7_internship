@@ -2,20 +2,14 @@
 
 This folder contains all programs developed to control the xArm7 robotic arm using MoveIt2. Note that in MoveIt2, the linear rail cannot be simulated and will not appear in the RViz2 window. To control the rail, the script `xarm7_linear_motor.py` was created to directly use the robot's services.
 
----
-
 ## Attention
 Before executing any program on the real robot, ensure that:
 1. The environmental conditions (such as the position of the table and the rail) match the actual setup.
 2. All programs are first tested in simulation mode to avoid potential issues.
 
----
-
 ## Usage of the Programs in the xarm7_moveit Folder
 
 All programs can be used in simulation mode and with the real robot. However, if you are using a program that involves a real camera, launch and use it as if it were on the simulated robot to ensure proper functionality (e.g., if using `xarm7_cam_pick_pour`, place a bowl under the camera).
-
----
 
 ### In Simulation
 To launch MoveIt2 + RViz2 in simulation mode, use the following command:
@@ -24,8 +18,6 @@ To launch MoveIt2 + RViz2 in simulation mode, use the following command:
 ros2 launch xarm_moveit_config xarm7_moveit_fake.launch.py [add_gripper:=true] [add_orbbec_astra:=true]
 ```
 
----
-
 ### With the Real Robot
 To launch MoveIt2 + RViz2 with the real robot, use the following command:
 
@@ -33,7 +25,6 @@ To launch MoveIt2 + RViz2 with the real robot, use the following command:
 ros2 launch xarm_moveit_config xarm7_moveit_realmove.launch.py robot_ip:=192.168.1.240 [add_gripper:=true] [add_orbbec_astra:=true]
 ```
 
----
 
 ### Running the Programs in the xarm7_moveit Folder
 For most programs, simply run:
@@ -58,8 +49,6 @@ ros2 launch astra_camera astra_pro.launch.xml
 ```
 
 **Note:** Always read the top comment in each program file, as it may contain specific instructions or prerequisites.
-
----
 
 ## Octomap
 
