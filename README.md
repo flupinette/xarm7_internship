@@ -1,6 +1,6 @@
 # Programs to Control the xArm7 Robot
 
-This repository contains the final work developed during an internship in 2025. It provides tools and configurations to control the xArm7 robotic arm with a linear track, gripper, and camera integration of an Orbbec Astra Pro using ROS2.
+This repository contains the final work developed during an internship in 2025. The goal of this internship was to control the xArm7 robotic arm to perform object manipulation tasks, in particular pouring gestures. This was achieved with the help of an Orbbec Astra Pro camera. The repository provides tools and configurations to control the xArm7 robotic arm with a linear track, a gripper, and camera integration of an Orbbec Astra Pro using ROS2.
 
 ---
 
